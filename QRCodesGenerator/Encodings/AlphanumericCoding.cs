@@ -24,10 +24,9 @@ namespace QRCodesGenerator
                 {':', 44}
             };
         }
-        
+
         //  весь АЛФАВИТ засунуть в словарь
         // каждую вторую умножаем можно сдлеать как в задаче Модульность
-        public string CodingType { get; set; }
 
         public string Encode(string data)
         {

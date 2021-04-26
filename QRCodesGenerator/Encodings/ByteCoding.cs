@@ -7,8 +7,6 @@ namespace QRCodesGenerator
 {
     public class ByteCoding : ICodingType
     {
-        public string CodingType { get; set; } = "0100";
-
         public string Encode(string data)
         {
             var encodeData = Encoding.UTF8.GetBytes(data);
