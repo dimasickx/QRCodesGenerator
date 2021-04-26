@@ -5,6 +5,8 @@ namespace QRCodesGenerator
 {
     public struct DigitalCoding : ICodingType
     {
+        public string CodingType { get; set; }
+
         public string Encode(string data)
         {
             var s = new StringBuilder(data);
