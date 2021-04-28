@@ -2,7 +2,7 @@
 
 namespace QRCodesGenerator
 {
-    public static class QrCodeInfo
+    public static class DataServiceInfo
     {
         public static string AddServiceInfo(Data data)
         {

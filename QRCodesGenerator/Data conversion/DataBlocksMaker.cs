@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace QRCodesGenerator
 {
-    public static class DataBlocks
+    public static class DataBlocksMaker
     {
         private static int GetCountOfBlocks(Data data)
         {
@@ -18,22 +18,24 @@ namespace QRCodesGenerator
             var dataInOneBlock = dataByte / countOfBlocks;
             var modulo = dataByte % countOfBlocks;
             if (modulo == 0)
-                Split(data.DataBit, countOfBlocks, dataInOneBlock, list, 8);
+                Split(data.DataBit, countOfBlocks, dataInOneBlock, list, 8, data.Level, data.Version);
             else
             {
-                var temporalData = Split(data.DataBit, countOfBlocks - modulo, dataInOneBlock, list, 8);
+                var temporalData = Split(data.DataBit, countOfBlocks - modulo,
+                    dataInOneBlock, list, 8, data.Level, data.Version);
                 dataInOneBlock = temporalData.Length / modulo;
-                Split(temporalData, modulo, dataInOneBlock, list, 1);
+                Split(temporalData, modulo, dataInOneBlock, list, 1, data.Level, data.Version);
             }
 
             return list;
         }
 
-        private static string Split(string data, int block, int dataInOneBlock, List<Block> list, int k)
+        private static string Split(string data, int countOfBlock, int dataInOneBlock, ICollection<Block> list, int k,
+            CorrectionLevel level, int version)
         {
-            for (var i = 0; i < block; i++)
+            for (var i = 0; i < countOfBlock; i++)
             {
-                list.Add(new Block(data.Substring(0, dataInOneBlock * k)));
+                list.Add(new Block(data.Substring(0, dataInOneBlock * k), level, version));
                 if (dataInOneBlock - 1 != data.Length - 1)
                     data = data.Substring(dataInOneBlock * k - 1, data.Length - dataInOneBlock * k);
                 else

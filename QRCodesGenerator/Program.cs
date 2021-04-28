@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace QRCodesGenerator
+﻿namespace QRCodesGenerator
 {
     public delegate string Encode(string data);
 
@@ -12,16 +9,13 @@ namespace QRCodesGenerator
             var encode = new Encode(TypeEncoding.ByteEncode);
             
             var data = new Data("Хабрахабраледядя че то поменяется?", CorrectionLevel.M, encode, "0100");
-            data.DataBit = QrCodeInfo
-                .AddServiceInfo(data)                               // мб сделать Extension
+            data.DataBit = DataServiceInfo
+                .AddServiceInfo(data)                               
                 .ComplementUpToMultiple8()
                 .ComplementUpToVersion(data);
             
-            var listOfBlocks = DataBlocks.SplitData(data);
-            foreach (var block in listOfBlocks)
-            {
-                Console.WriteLine(block.Data);
-            }
+            var listOfBlocks = DataBlocksMaker.SplitData(data);
+            
         }
     }
 }

@@ -37,18 +37,18 @@ namespace QRCodesGenerator
             return result;
         }
 
-        public static string DigitToBit(string data, int b)
+        public static string DigitToBit(string data, int bits)
         {
-            var bit = Convert.ToString(int.Parse(data), 2);
+            var dataInBits = Convert.ToString(int.Parse(data), 2);
             var s = "";
-            var complement = b - bit.Length;
+            var complement = bits - dataInBits.Length;
             while (complement != 0)
             {
                 s += '0';
                 complement--;
             }
 
-            return s + bit;
+            return s + dataInBits;
         }
     }
 }
