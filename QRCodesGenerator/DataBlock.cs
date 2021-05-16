@@ -1,11 +1,11 @@
 ﻿namespace QRCodesGenerator
 {
-    public class Block
+    public class DataBlock : IHaveData
     {
-        public string Data;
+        public string Data { get;}
         public int CountOfCorrectionBytes;
 
-        public Block(string data, CorrectionLevel level, int version)
+        public DataBlock(string data, CorrectionLevel level, int version)
         {
             Data = data;
             CountOfCorrectionBytes = GetCount(level, version);

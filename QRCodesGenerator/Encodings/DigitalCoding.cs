@@ -28,7 +28,7 @@ namespace QRCodesGenerator
             return result;
         }
 
-        private static string ToBit(string data, int b)
+        public static string ToBit(string data, int b)
         {
             var bit = Convert.ToString(int.Parse(data), 2);
             var s = "";

@@ -5,6 +5,6 @@ namespace QRCodesGenerator
 {
     public class QrCode
     {
-        public List<Block> Blocks;
+        public List<DataBlock> Blocks;
     }
 }

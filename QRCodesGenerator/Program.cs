@@ -1,21 +1,28 @@
-﻿namespace QRCodesGenerator
-{
-    public delegate string Encode(string data);
+﻿using System;
+using System.Text.RegularExpressions;
 
+namespace QRCodesGenerator
+{
     class Program
     {
         static void Main()
         {
-            var encode = new Encode(TypeEncoding.ByteEncode);
+            const string codingType = "0100"; // задать словарь чтоли
+            var data = new Data("Хабрахабр але дядя че то поменяется?", CorrectionLevel.M, TypeEncoding.ByteEncode,
+                codingType);
             
-            var data = new Data("Хабрахабраледядя че то поменяется?", CorrectionLevel.M, encode, "0100");
             data.DataBit = DataServiceInfo
-                .AddServiceInfo(data)                               
+                .AddServiceInfo(data)
                 .ComplementUpToMultiple8()
                 .ComplementUpToVersion(data);
             
             var listOfBlocks = DataBlocksMaker.SplitData(data);
-            
+            var offset = BlocksCorrectionBytes.AddOffsetToBlocks(listOfBlocks);
+            Console.WriteLine();
+            // foreach (var variable in offset)
+            // {
+            //     Console.WriteLine(variable);
+            // }
         }
     }
 }

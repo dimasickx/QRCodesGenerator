@@ -10,9 +10,9 @@ namespace QRCodesGenerator
             return TableOfBlocks.BlockMap[data.Level][data.Version];
         }
 
-        public static IEnumerable<Block> SplitData(Data data)
+        public static IEnumerable<DataBlock> SplitData(Data data)
         {
-            var list = new List<Block>();
+            var list = new List<DataBlock>();
             var countOfBlocks = GetCountOfBlocks(data);
             var dataByte = data.DataBit.Length / 8;
             var dataInOneBlock = dataByte / countOfBlocks;
@@ -30,12 +30,12 @@ namespace QRCodesGenerator
             return list;
         }
 
-        private static string Split(string data, int countOfBlock, int dataInOneBlock, ICollection<Block> list, int k,
+        private static string Split(string data, int countOfBlock, int dataInOneBlock, ICollection<DataBlock> list, int k,
             CorrectionLevel level, int version)
         {
             for (var i = 0; i < countOfBlock; i++)
             {
-                list.Add(new Block(data.Substring(0, dataInOneBlock * k), level, version));
+                list.Add(new DataBlock(data.Substring(0, dataInOneBlock * k), level, version));
                 if (dataInOneBlock - 1 != data.Length - 1)
                     data = data.Substring(dataInOneBlock * k - 1, data.Length - dataInOneBlock * k);
                 else

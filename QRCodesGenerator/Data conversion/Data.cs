@@ -9,7 +9,7 @@ namespace QRCodesGenerator
         public readonly string CodingType;
         public int Version => GetVersion(Level, DataBit.Length); 
 
-        public Data(string data, CorrectionLevel level, Encode encode, string codingType)
+        public Data(string data, CorrectionLevel level, Func<string, string> encode, string codingType)
         {
             DataBit = encode(data);
             Level = level;
@@ -17,14 +17,10 @@ namespace QRCodesGenerator
         }
         private static int GetVersion(CorrectionLevel level, int dataLenght)
         {
-            foreach (var l in TableOfVersions.VersionMap.Keys)
+            for (var i = 0; i < TableOfVersions.VersionMap[level].Length; i++) // TODO тут нужно использовать сортировку
             {
-                if (level != l) continue;
-                for (var i = 0; i < TableOfVersions.VersionMap[l].Length; i++)
-                {
-                    if (dataLenght < TableOfVersions.VersionMap[l][i])
-                        return i;
-                }
+                if (dataLenght < TableOfVersions.VersionMap[level][i])
+                    return i;
             }
 
             throw new NullReferenceException("level not exist");
