@@ -4,11 +4,11 @@ namespace QRCodesGenerator
 {
     public struct TableServiceInfo
     {
-        public static Dictionary<int, int[]> ServiceMap;
+        public static Dictionary<int, int[]> LenOfServiceCell;
 
         static TableServiceInfo()
         {
-            ServiceMap = new Dictionary<int, int[]>
+            LenOfServiceCell = new Dictionary<int, int[]>
             {
                 {9, new[] {10, 9, 8}},
                 {26, new[] {12, 11, 16}},

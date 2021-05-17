@@ -17,9 +17,9 @@ namespace QRCodesGenerator
         }
         private static int GetVersion(CorrectionLevel level, int dataLenght)
         {
-            for (var i = 0; i < TableOfVersions.VersionMap[level].Length; i++) // TODO тут нужно использовать сортировку
+            for (var i = 0; i < TableOfVersions.AmountInfoForVersion[level].Length; i++) // TODO тут нужно использовать сортировку
             {
-                if (dataLenght < TableOfVersions.VersionMap[level][i])
+                if (dataLenght < TableOfVersions.AmountInfoForVersion[level][i])
                     return i;
             }
 

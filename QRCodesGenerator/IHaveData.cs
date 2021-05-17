@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace QRCodesGenerator
 {
     public interface IHaveData
     {
-        string Data { get; }
+        List<int> Data { get; }
     }
 }
+// Заменить все дата блоки на IhaveData

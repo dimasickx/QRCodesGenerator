@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+
 namespace QRCodesGenerator
 {
-    public class CorrectionBlock : IHaveData
+    public class CorrectionBlock
     {
-        public string Data { get; }
+        public List<int> Data { get; }
 
-        public CorrectionBlock(string data)
+        public CorrectionBlock(List<int> data)
         {
             Data = data;
         }

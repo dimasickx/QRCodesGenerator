@@ -4,7 +4,7 @@ namespace QRCodesGenerator
 {
     public static class TableOfVersions
     {
-        public static readonly Dictionary<CorrectionLevel, int[]> VersionMap;
+        public static readonly Dictionary<CorrectionLevel, int[]> AmountInfoForVersion;
 
         static TableOfVersions()
         {
@@ -20,7 +20,7 @@ namespace QRCodesGenerator
                 5016, 5352, 5712, 6256, 6880, 7312, 8000, 8496, 9024, 9544, 10136, 10984, 11640, 12328, 13048, 13800,
                 14496, 15312, 15936, 16816, 17728, 18672
             };
-            VersionMap = new Dictionary<CorrectionLevel, int[]>
+            AmountInfoForVersion = new Dictionary<CorrectionLevel, int[]>
             {
                 {CorrectionLevel.L, lLevel},
                 {CorrectionLevel.M, mLevel}

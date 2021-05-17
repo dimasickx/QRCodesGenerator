@@ -1,11 +1,13 @@
-﻿namespace QRCodesGenerator
+﻿using System.Collections.Generic;
+
+namespace QRCodesGenerator
 {
-    public class DataBlock : IHaveData
+    public class DataBlock
     {
-        public string Data { get;}
+        public List<int> Data { get;}
         public int CountOfCorrectionBytes;
 
-        public DataBlock(string data, CorrectionLevel level, int version)
+        public DataBlock(List<int> data, CorrectionLevel level, int version)
         {
             Data = data;
             CountOfCorrectionBytes = GetCount(level, version);
@@ -15,5 +17,7 @@
         {
             return TableCorrectionBytes.BytesMap[level][version];
         }
+        
+        
     }
 }

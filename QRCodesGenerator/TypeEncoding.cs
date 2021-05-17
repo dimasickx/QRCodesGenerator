@@ -37,7 +37,7 @@ namespace QRCodesGenerator
             return result;
         }
 
-        public static string DigitToBit(string data, int bits)
+        public static string DigitToBit(string data, int bits)  // мб в extension
         {
             var dataInBits = Convert.ToString(int.Parse(data), 2);
             var s = "";
