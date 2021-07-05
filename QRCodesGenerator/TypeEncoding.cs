@@ -10,7 +10,7 @@ namespace QRCodesGenerator
         {
             var encodeData = Encoding.UTF8.GetBytes(data);
             var result = encodeData.Aggregate("",
-                (current, b) => current + Convert.ToString(b, 2));
+                (current, b) => current + Convert.ToString(b, 2)).SupplementToMultiple(8, true);
             return result;
         }
 
@@ -22,33 +22,19 @@ namespace QRCodesGenerator
             for (var i = 0; i < data.Length / 3; i++)
             {
                 var r = s[0] - '0' + (s[1] - '0').ToString() + (s[2] - '0');
-                result += DigitToBit(r, 10);
+                result += r.DigitToBit(10);
                 s.Remove(0, 3);
             }
 
             for (var i = 0; i < modulo - 1; i++)
             {
                 if (modulo == 2)
-                    result += DigitToBit(s[0] - '0' + (s[1] - '0').ToString(), 7);
+                    result += (s[0] - '0' + (s[1] - '0').ToString()).DigitToBit(7);
                 else
-                    result += DigitToBit((s[0] - '0').ToString(), 4);
+                    result += (s[0] - '0').ToString().DigitToBit(4);
             }
 
             return result;
-        }
-
-        public static string DigitToBit(string data, int bits)  // мб в extension
-        {
-            var dataInBits = Convert.ToString(int.Parse(data), 2);
-            var s = "";
-            var complement = bits - dataInBits.Length;
-            while (complement != 0)
-            {
-                s += '0';
-                complement--;
-            }
-
-            return s + dataInBits;
         }
     }
 }

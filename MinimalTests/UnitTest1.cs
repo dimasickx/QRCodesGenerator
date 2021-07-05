@@ -6,10 +6,12 @@ namespace MinimalTests
 {
     public class Tests
     {
+        private Data _someData;
         [SetUp]
         public void Setup()
         {
-            
+            const string someStr = "testing string for version of data in bit view";
+            _someData = new Data(someStr, CorrectionLevel.L, TypeEncoding.ByteEncode, "0100");
         }
 
         [Test]
@@ -26,7 +28,27 @@ namespace MinimalTests
                 0
             };
             var block = BlocksCorrectionBytes.SetByteCorrection(listOfCorrection, 28, 16);
-            Assert.AreEqual(block.Data, expect);
+            Assert.AreEqual(expect, block.Data);
+        }
+
+        [Test]
+        public void TestGetVersionOfData()
+        {
+            var value = TableOfVersions.AmountInfoForVersion[CorrectionLevel.L][_someData.Version];
+            Assert.IsTrue(_someData.DataBit.Length < value);
+            Assert.AreEqual(2, _someData.Version);
+        }
+
+        [Test]
+        public void TestAddingServiceInfo()
+        {
+            var someStr = "00000111111111111111111111100000";
+            var countOfByte = someStr.Length / 8;
+            var data = new Data(" ", CorrectionLevel.L, s => s, "0100");
+            data.DataBit = someStr;
+            var expected = ("0100" + countOfByte.ToString().DigitToBit(8) + someStr);  // .SupplementToMultiple() (не верно рабоатет) походу это не делаю в строке  13 а делаю в returne?
+            
+            Assert.AreEqual("0100" + countOfByte.ToString().DigitToBit(8) + someStr, DataServiceInfo.AddServiceInfo(data));
         }
     }
 }

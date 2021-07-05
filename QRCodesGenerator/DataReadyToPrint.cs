@@ -7,6 +7,7 @@ namespace QRCodesGenerator
     {
         public static string CombinationBlocks(List<DataBlock> dataBlocks, List<CorrectionBlock> correctionBlocks)
         {
+            // 
             // var result = new int[dataBlocks.Count * 2];
             // for (int i = 0; i < dataBlocks.Count; i++)
             // {

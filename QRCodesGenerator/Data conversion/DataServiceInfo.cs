@@ -13,7 +13,7 @@ namespace QRCodesGenerator
             var str = codingType + amountOfData + data.DataBit;
             var result = CheckVersionIsCorrect(str, data);
 
-            return ComplementUpToVersion(result.SupplementToMultiple(8), data.Level, data.Version);
+            return ComplementUpToVersion(result.SupplementToMultiple(8, false), data.Level, data.Version);
         } 
 
         private static string CheckVersionIsCorrect(string str, Data data)
@@ -42,9 +42,9 @@ namespace QRCodesGenerator
 
         private static string GetAmountOfDataInBinaryView(Data data, string codingType, int lenOfCell)
         {
-            if (codingType != "0100") return TypeEncoding.DigitToBit(data.DataBit.Length.ToString(), lenOfCell);
+            if (codingType != "0100") return data.DataBit.Length.ToString().DigitToBit(lenOfCell);
             var b = data.DataBit.Length / 8;
-            return TypeEncoding.DigitToBit(b.ToString(), lenOfCell);
+            return b.ToString().DigitToBit(lenOfCell);
         }
         
         private static string ComplementUpToVersion(string str, CorrectionLevel level, int version)

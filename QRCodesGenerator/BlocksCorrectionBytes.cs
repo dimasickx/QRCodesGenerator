@@ -10,7 +10,7 @@ namespace QRCodesGenerator
     {
         public static List<CorrectionBlock> AddOffsetToBlocks(IEnumerable<DataBlock> blocks)
         {
-            var correctionBlocks = new List<CorrectionBlock>(); // надо менять
+            var correctionBlocks = new List<CorrectionBlock>();
             foreach (var block in blocks)
             {
                 var listOfCorrection = MakeListOfCorrection(block.Data, block.CountOfCorrectionBytes);
